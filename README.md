@@ -12,7 +12,8 @@
   <a href="https://snippedia.app/">Live Demo</a> ·
   <a href="#features">Features</a> ·
   <a href="#getting-started">Getting Started</a> ·
-  <a href="#roadmap">Roadmap</a>
+  <a href="#roadmap">Roadmap</a> ·
+  <a href="docs/case-study.md">Case Study</a>
 </p>
 
 <p align="center">
@@ -126,7 +127,7 @@ Database credentials should never be committed to the repository.
 
 ## Contributing
 
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Please also read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## Security
 
