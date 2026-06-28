@@ -8,10 +8,10 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "deploy": "npm run build && chown -R snippedia:snippedia ../public_html && find ../public_html -type d -exec chmod 755 {} \\; && find ../public_html -type f -exec chmod 644 {} \\;",
+    "deploy": "SNIPPEDIA_BUILD_OUTDIR=../public_html vite build && chown -R snippedia:snippedia ../public_html && find ../public_html -type d -exec chmod 755 {} \\; && find ../public_html -type f -exec chmod 644 {} \\;",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:ci": "vite build --outDir dist --emptyOutDir true"
+    "build:ci": "npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

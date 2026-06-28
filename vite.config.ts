@@ -4,7 +4,9 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
 
-export default defineConfig(({ mode }) => ({
+const buildOutDir = process.env.SNIPPEDIA_BUILD_OUTDIR || "dist";
+
+export default defineConfig(() => ({
   /* ────────── Dev server ────────── */
   server: {
     host: "::",
@@ -58,7 +60,7 @@ export default defineConfig(({ mode }) => ({
 
   /* ────────── Build ────────── */
   build: {
-    outDir: "../public_html", // gera direto na pasta servida
+    outDir: buildOutDir,
     emptyOutDir: true,
   },
 }));
