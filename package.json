@@ -10,7 +10,8 @@
     "build:dev": "vite build --mode development",
     "deploy": "npm run build && chown -R snippedia:snippedia ../public_html && find ../public_html -type d -exec chmod 755 {} \\; && find ../public_html -type f -exec chmod 644 {} \\;",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:ci": "vite build --outDir dist --emptyOutDir true"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -84,5 +85,14 @@
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
     "vite-plugin-pwa": "^1.0.0"
+  },
+  "license": "MIT",
+  "homepage": "https://snippedia.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eddienews/snippedia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eddienews/snippedia/issues"
   }
 }

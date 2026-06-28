@@ -1,21 +1,56 @@
 # Snippedia
 
-Live demo: https://snippedia.app/
+<p align="center">
+  <img src="public/icon-512x512.png" alt="Snippedia logo" width="96" height="96" />
+</p>
 
-Snippedia is a short-form knowledge discovery app that turns encyclopedia-style learning into a fast, visual, mobile-friendly feed. It uses Wikipedia content as a foundation and presents articles as swipeable snippets, helping people move from casual curiosity to meaningful exploration with less friction.
+<p align="center">
+  <strong>Short-form knowledge discovery powered by Wikipedia.</strong>
+</p>
 
-The project experiments with a simple idea: credible educational content can feel as engaging and approachable as modern content feeds without losing its usefulness.
+<p align="center">
+  <a href="https://snippedia.app/">Live Demo</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#getting-started">Getting Started</a> ·
+  <a href="#roadmap">Roadmap</a>
+</p>
+
+<p align="center">
+  <img alt="React" src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=111" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=fff" />
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=fff" />
+  <img alt="PWA" src="https://img.shields.io/badge/PWA-ready-5A0FC8" />
+  <img alt="License" src="https://img.shields.io/badge/License-MIT-green" />
+</p>
+
+## Live Demo
+
+Try Snippedia here: https://snippedia.app/
+
+## Why Snippedia
+
+Traditional encyclopedia pages are powerful, but they can feel dense when someone only wants to explore, sample, and follow curiosity. Snippedia reimagines that flow as a visual, swipeable feed where each article becomes a lightweight entry point into deeper learning.
+
+The product goal is to make credible educational content feel fast, approachable, and habit-forming without turning it into noise.
 
 ## Features
 
 - Wikipedia-powered article search and discovery
-- Swipeable full-screen reading experience
+- Full-screen swipeable article feed
 - Trending and category-based exploration
-- Reading history and favorites
-- Reading statistics and activity insights
+- Smart search ranking for ambiguous terms
+- Favorites, reading history, and reading stats
 - Progressive Web App support
 - Offline-aware article caching
 - Responsive interface for desktop and mobile
+- Share previews for article links
+
+## Product Highlights
+
+- Mobile-first reading experience inspired by modern discovery feeds
+- Resilient Wikipedia/Wikimedia API integration with fallbacks for missing metadata
+- Local-first personalization using history, favorites, and reading activity
+- Open source setup with MIT license, security policy, contribution guide, and CI
 
 ## Tech Stack
 
@@ -26,7 +61,13 @@ The project experiments with a simple idea: credible educational content can fee
 - shadcn/ui
 - TanStack Query
 - Framer Motion
+- Express
+- MySQL
 - Wikipedia and Wikimedia APIs
+
+## Screenshots
+
+Screenshots and a short product walkthrough are planned. For now, the live demo is the best way to experience the app: https://snippedia.app/
 
 ## Getting Started
 
@@ -71,12 +112,26 @@ Database credentials should never be committed to the repository.
 - `src/pages`: route-level pages
 - `src/hooks`: local state and app behavior hooks
 - `src/services`: API integrations, caching, and article transformation logic
+- `server`: optional Express/MySQL API
+- `share-server`: share preview server for social metadata
 - `public`: static assets and PWA files
 
-## Status
+## Roadmap
 
-Snippedia is an active portfolio project focused on product design, frontend engineering, API integration, and user experience for educational discovery.
+- Add real screenshots and a product walkthrough GIF
+- Add tests for search ranking and article normalization
+- Improve code splitting for smaller production bundles
+- Expand accessibility checks across feed navigation and dialogs
+- Add richer recommendation signals for article discovery
+
+## Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+## Security
+
+If you find a vulnerability or accidentally discover sensitive data, please follow [SECURITY.md](SECURITY.md).
 
 ## License
 
-A license should be selected before publishing this repository as open source.
+Snippedia is released under the [MIT License](LICENSE).
