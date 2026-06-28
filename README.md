@@ -1,5 +1,7 @@
 # Snippedia
 
+Live demo: https://snippedia.app/
+
 Snippedia is a short-form knowledge discovery app that turns encyclopedia-style learning into a fast, visual, mobile-friendly feed. It uses Wikipedia content as a foundation and presents articles as swipeable snippets, helping people move from casual curiosity to meaningful exploration with less friction.
 
 The project experiments with a simple idea: credible educational content can feel as engaging and approachable as modern content feeds without losing its usefulness.
