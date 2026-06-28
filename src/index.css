@@ -1,0 +1,735 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Snippedia Theme Tokens
+   - New canonical variables: --snippedia-*
+   - Legacy aliases kept: --wikitok-red etc (do not remove yet)
+   ========================================================================== */
+:root {
+  /* Canonical theme (dynamic) */
+  --theme-primary: #FE2C55;
+  --theme-secondary: #20D5EC;
+  --theme-accent: #FE2C55;
+
+  /* Canonical Snippedia tokens */
+  --snippedia-red: var(--theme-primary);
+  --snippedia-cyan: var(--theme-secondary);
+  --snippedia-accent: var(--theme-accent);
+
+  /* Use this for the “app dark background” in CSS-only contexts */
+  --snippedia-dark: #0a0a0a;
+
+  /* Convenience (legacy / neutral) */
+  --primary-color: var(--snippedia-red);
+  --secondary-color: var(--snippedia-cyan);
+  --accent-color: var(--snippedia-accent);
+
+  /* Legacy (WikiTok) — keep while migrating components */
+  --wikitok-red: var(--snippedia-red);
+}
+
+/* ==========================================================================
+   Base Layer
+   ========================================================================== */
+@layer base {
+  body {
+    /* Use legacy class here to avoid breaking existing Tailwind utilities.
+       We'll alias bg-wikitok-dark -> snippedia dark below. */
+    @apply bg-wikitok-dark text-white m-0 p-0 overflow-x-hidden overflow-y-auto;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+
+  /* Theme transition effect */
+  .theme-updating * {
+    transition: all 0.1s ease !important;
+  }
+
+  /* Dark mode root */
+  .dark {
+    @apply bg-wikitok-dark text-white;
+  }
+
+  .dark .bg-background {
+    @apply bg-wikitok-dark;
+  }
+
+  .dark .text-foreground {
+    @apply text-white;
+  }
+
+  /* Light Mode Styles */
+  .light-mode {
+    @apply bg-white text-gray-900;
+  }
+
+  /* Legacy bg class support inside light-mode */
+  .light-mode .bg-wikitok-dark {
+    @apply bg-white;
+  }
+
+  .light-mode .text-white {
+    @apply text-gray-900;
+  }
+
+  .light-mode .bg-black\/90 {
+    @apply bg-white/95;
+  }
+
+  .light-mode .bg-black\/20 {
+    @apply bg-gray-200/60;
+  }
+
+  .light-mode .text-white\/60 {
+    @apply text-gray-600;
+  }
+
+  .light-mode .text-white\/80 {
+    @apply text-gray-700;
+  }
+
+  .light-mode .border-white\/20 {
+    @apply border-gray-300;
+  }
+
+  /* Dynamic Theme Colors - Force application with !important */
+  .theme-primary {
+    color: var(--theme-primary) !important;
+  }
+
+  .theme-secondary {
+    color: var(--theme-secondary) !important;
+  }
+
+  .theme-accent {
+    color: var(--theme-accent) !important;
+  }
+
+  .bg-theme-primary {
+    background-color: var(--theme-primary) !important;
+  }
+
+  .bg-theme-secondary {
+    background-color: var(--theme-secondary) !important;
+  }
+
+  .bg-theme-accent {
+    background-color: var(--theme-accent) !important;
+  }
+
+  .border-theme-primary {
+    border-color: var(--theme-primary) !important;
+  }
+
+  /* ==========================================================================
+     Canonical Snippedia utility “overrides”
+     - These allow you to use text-snippedia-red / bg-snippedia-red / border-snippedia-red
+     - without changing Tailwind config yet, by providing CSS fallbacks.
+     ========================================================================== */
+  .text-snippedia-red,
+  .text-snippedia-red *,
+  button.text-snippedia-red,
+  a.text-snippedia-red {
+    color: var(--theme-primary) !important;
+  }
+
+  .bg-snippedia-red,
+  .bg-snippedia-red *,
+  button.bg-snippedia-red {
+    background-color: var(--theme-primary) !important;
+  }
+
+  .hover\:bg-snippedia-red:hover,
+  button:hover.hover\:bg-snippedia-red {
+    background-color: var(--theme-primary) !important;
+  }
+
+  .hover\:text-snippedia-red:hover {
+    color: var(--theme-primary) !important;
+  }
+
+  .border-snippedia-red {
+    border-color: var(--theme-primary) !important;
+  }
+
+  /* Snippedia dark background alias */
+  .bg-snippedia-dark {
+    background-color: var(--snippedia-dark) !important;
+  }
+
+  /* ==========================================================================
+     Legacy WikiTok utility “overrides” (compat while migrating)
+     ========================================================================== */
+  .text-wikitok-red,
+  .text-wikitok-red *,
+  button.text-wikitok-red,
+  a.text-wikitok-red {
+    color: var(--theme-primary) !important;
+  }
+
+  .bg-wikitok-red,
+  .bg-wikitok-red *,
+  button.bg-wikitok-red {
+    background-color: var(--theme-primary) !important;
+  }
+
+  .hover\:bg-wikitok-red:hover,
+  button:hover.hover\:bg-wikitok-red {
+    background-color: var(--theme-primary) !important;
+  }
+
+  .hover\:text-wikitok-red:hover {
+    color: var(--theme-primary) !important;
+  }
+
+  .border-wikitok-red {
+    border-color: var(--theme-primary) !important;
+  }
+
+  /* Map legacy "wikitok dark" to snippedia dark.
+     NOTE: this is a CSS override for a Tailwind class name already used in code. */
+  .bg-wikitok-dark {
+    background-color: var(--snippedia-dark) !important;
+  }
+
+  /* Force theme colors on specific UI elements (legacy selector kept) */
+  button[class*="wikitok-red"],
+  .wikitok-red,
+  [style*="#FE2C55"] {
+    background-color: var(--theme-primary) !important;
+    color: white !important;
+  }
+
+  /* IMPORTANT: remove global heading recolor (professional fix)
+     Old CSS forced ALL headings to theme-primary which kills readability.
+     Now: only add theme color when explicitly desired via classes. */
+  /* (intentionally removed)
+     h1, h2, h3, h4, h5, h6 { color: var(--theme-primary) !important; }
+  */
+
+  /* If you still want “brand titles” in some places, use this class */
+  .brand-title,
+  .brand-title * {
+    color: var(--theme-primary) !important;
+  }
+
+  /* Keep overlays/title helpers but do NOT force all titles everywhere */
+  .text-overlay .brand-title,
+  .article-title.brand-title {
+    color: var(--theme-primary) !important;
+  }
+
+  /* Night Mode Styles */
+  .night-mode {
+    position: relative;
+  }
+
+  .night-mode::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--night-overlay, rgba(255, 200, 150, 0.05));
+    pointer-events: none;
+    z-index: -1;
+    mix-blend-mode: overlay;
+  }
+
+  .night-mode .bg-wikitok-dark {
+    background-color: var(--snippedia-dark) !important;
+  }
+
+  .night-mode .bg-snippedia-dark {
+    background-color: var(--snippedia-dark) !important;
+  }
+
+  .night-mode .text-white {
+    color: #f5f1e8 !important;
+  }
+
+  .night-mode .bg-black\/90 {
+    background-color: rgba(10, 10, 10, 0.95) !important;
+  }
+
+  .night-mode .bg-black\/80 {
+    background-color: rgba(10, 10, 10, 0.9) !important;
+  }
+
+  .night-mode .border-white\/20 {
+    border-color: rgba(245, 241, 232, 0.15) !important;
+  }
+
+  .night-mode .text-white\/70 {
+    color: rgba(245, 241, 232, 0.7) !important;
+  }
+
+  .night-mode .text-white\/80 {
+    color: rgba(245, 241, 232, 0.8) !important;
+  }
+
+  /* Blue Light Filter Animation */
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  /* Night Mode Transition */
+  .night-mode-transition {
+    transition: filter 0.5s ease-in-out;
+  }
+
+  /* Enhanced contrast for night mode */
+  .night-mode h1,
+  .night-mode h2,
+  .night-mode h3 {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .night-mode p {
+    color: #f0ebe0 !important;
+    line-height: 1.7;
+  }
+
+  /* Night mode specific animations */
+  .night-mode .animate-fade-in {
+    animation: fadeInWarm 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInWarm {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: sepia(0.1);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: sepia(0.2);
+    }
+  }
+
+  /* Enhanced Shimmer Animation */
+  @keyframes shimmer-enhanced {
+    0% {
+      transform: translateX(-100%) skewX(-12deg);
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(200%) skewX(-12deg);
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes shimmer-wave {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes enhanced-pulse {
+    0%,
+    100% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes wave {
+    0% {
+      transform: translateX(-100%) translateY(0) skewX(-12deg);
+    }
+    100% {
+      transform: translateX(200%) translateY(0) skewX(-12deg);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 10px rgba(254, 44, 85, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(254, 44, 85, 0.6),
+        0 0 30px rgba(254, 44, 85, 0.4);
+    }
+  }
+
+  /* Micro-interaction animations */
+  @keyframes button-press {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes card-lift {
+    0% {
+      transform: translateY(0) scale(1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @keyframes progress-fill {
+    0% {
+      width: 0;
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* ==========================================================================
+   Components Layer
+   ========================================================================== */
+@layer components {
+  .sidebar-icon {
+    @apply w-10 h-10 flex items-center justify-center text-white transition-colors duration-300;
+  }
+
+  .sidebar-icon:hover {
+    color: var(--theme-primary) !important;
+  }
+
+  .article-container {
+    @apply h-screen w-full overflow-hidden;
+  }
+
+  .article-section {
+    @apply h-screen w-full relative flex items-center justify-center;
+  }
+
+  .text-overlay {
+    @apply absolute bottom-24 left-4 right-4 text-white z-10;
+  }
+
+  /* Touch Target Optimization */
+  .touch-target {
+    @apply min-w-[44px] min-h-[44px] flex items-center justify-center;
+  }
+
+  /* Mobile-first swipe indicators */
+  .swipe-indicator {
+    @apply absolute left-1/2 transform -translate-x-1/2 z-20 text-white/40 text-xs;
+  }
+
+  .swipe-indicator.top {
+    @apply top-4;
+  }
+
+  .swipe-indicator.bottom {
+    @apply bottom-4;
+  }
+
+  /* Focus Mode Styles */
+  .focus-mode .sidebar-icon,
+  .focus-mode .fixed:not(.reading-controls) {
+    @apply opacity-0 pointer-events-none transition-opacity duration-300;
+  }
+
+  .focus-mode .article-section {
+    @apply bg-black/90;
+  }
+
+  .focus-mode .article-section img {
+    @apply opacity-20;
+  }
+
+  .focus-mode .article-section .text-overlay,
+  .focus-mode .article-section > div:last-child {
+    @apply max-w-4xl mx-auto px-12;
+  }
+
+  /* Reading Enhancement Styles */
+  .reading-enhanced {
+    @apply leading-relaxed;
+  }
+
+  .reading-enhanced h1 {
+    @apply mb-6 leading-tight;
+  }
+
+  .reading-enhanced p {
+    @apply mb-4 leading-loose;
+  }
+
+  /* Theme Transition Animations */
+  .theme-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Enhanced Animations */
+  .animate-shimmer-enhanced {
+    animation: shimmer-enhanced 2s infinite;
+  }
+
+  .animate-shimmer-wave {
+    animation: shimmer-wave 1.5s infinite;
+  }
+
+  .animate-enhanced-pulse {
+    animation: enhanced-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-wave {
+    animation: wave 2s infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-button-press {
+    animation: button-press 0.15s ease-out;
+  }
+
+  .animate-card-lift {
+    animation: card-lift 0.3s ease-out forwards;
+  }
+
+  .animate-progress-fill {
+    animation: progress-fill 0.8s ease-out forwards;
+  }
+
+  /* Enhanced Hover Effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:animate-card-lift;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:animate-glow-pulse;
+  }
+
+  .hover-float {
+    @apply transition-transform duration-300 hover:animate-float;
+  }
+
+  /* Interactive Button Styles */
+  .btn-press {
+    @apply active:animate-button-press;
+  }
+
+  /* Loading State Improvements */
+  .loading-gradient {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer-enhanced 2s infinite;
+  }
+
+  /* Card Enhancement */
+  .card-enhanced {
+    @apply bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden relative;
+  }
+
+  .card-enhanced::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transition: left 0.5s;
+  }
+
+  .card-enhanced:hover::before {
+    left: 100%;
+  }
+
+  /* Mobile Responsive Adjustments */
+  @media (max-width: 768px) {
+    .article-section {
+      @apply px-4;
+    }
+
+    .text-overlay {
+      @apply bottom-20 left-3 right-3;
+    }
+
+    .focus-mode .article-section .text-overlay,
+    .focus-mode .article-section > div:last-child {
+      @apply px-6 max-w-none;
+    }
+  }
+}
+
+/* ==========================================================================
+   Scrollbars
+   ========================================================================== */
+/* Custom Scrollbar for Light Mode */
+.light-mode::-webkit-scrollbar {
+  width: 8px;
+}
+
+.light-mode::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+.light-mode::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full;
+}
+
+.light-mode::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Mobile Scrollbar */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+}
+
+/* Prevent text selection on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .article-section img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+/* ==========================================================================
+   Utilities Layer
+   ========================================================================== */
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Heatmap grid support */
+  .grid-cols-25 {
+    grid-template-columns: repeat(25, minmax(0, 1fr));
+  }
+
+  /* Dark theme scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(220, 38, 38, 0.6);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(220, 38, 38, 0.8);
+  }
+
+  /* Shimmer animation for loading states */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  /* Custom chart styles */
+  .recharts-surface {
+    overflow: visible;
+  }
+
+  /* Analytics specific styles */
+  .analytics-card {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .analytics-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  /* Heatmap cell hover effects */
+  .heatmap-cell {
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .heatmap-cell:hover {
+    transform: scale(1.1);
+    border: 2px solid rgba(220, 38, 38, 0.8);
+  }
+}
