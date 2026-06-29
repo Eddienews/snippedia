@@ -68,7 +68,13 @@ The product goal is to make credible educational content feel fast, approachable
 
 ## Screenshots
 
-Screenshots and a short product walkthrough are planned. For now, the live demo is the best way to experience the app: https://snippedia.app/
+<p align="center">
+  <img src="public/screenshots/home-desktop.png" alt="Snippedia desktop article feed" width="900" />
+</p>
+
+<p align="center">
+  <img src="public/screenshots/home-mobile.png" alt="Snippedia mobile article feed" width="280" />
+</p>
 
 ## Getting Started
 
