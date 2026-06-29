@@ -66,6 +66,12 @@ The product goal is to make credible educational content feel fast, approachable
 - MySQL
 - Wikipedia and Wikimedia APIs
 
+## Walkthrough
+
+<p align="center">
+  <img src="public/screenshots/walkthrough.gif" alt="Snippedia product walkthrough" width="900" />
+</p>
+
 ## Screenshots
 
 <p align="center">
